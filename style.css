@@ -1,0 +1,127 @@
+/* Estilos generales y fondo estrellado */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(to bottom, #0b0c1d, #1f2833, #3a506b); /* Cielo nocturno */
+    color: #f0f0f0; /* Texto claro */
+    font-family: 'Lato', sans-serif;
+    overflow: hidden; /* Evita barras de scroll por elementos que salen */
+    position: relative; /* Necesario para posicionar elementos hijos absolutos */
+    display: flex; /* Centra el contenido principal */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor del texto principal */
+.content {
+    position: relative; /* Para estar sobre las estrellas/flores */
+    z-index: 10;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente */
+    padding: 40px 60px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+    max-width: 600px; /* Límite de ancho */
+    animation: fadeInContent 2s ease-in-out;
+}
+
+@keyframes fadeInContent {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    font-family: 'Pacifico', cursive; /* Fuente bonita para el título */
+    font-size: 3em;
+    color: #ffd700; /* Color dorado */
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ffd700, 0 0 15px #ffec8b;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 300; /* Más ligero */
+}
+
+.signature {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5em;
+    margin-top: 30px;
+    color: #ffb6c1; /* Rosa claro */
+    text-shadow: 0 0 5px #ffb6c1;
+}
+
+/* Contenedores para elementos dinámicos */
+.stars-container,
+.flowers-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Para que no interfieran con el texto */
+    z-index: 1; /* Detrás del contenido */
+}
+
+/* Estilos base para estrellas y flores */
+.star, .flower {
+    position: absolute;
+    animation: fall linear infinite;
+    will-change: transform, opacity; /* Optimización */
+}
+
+/* Estilo específico para estrellas */
+.star {
+    width: 2px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff; /* Efecto brillo */
+    opacity: 0; /* Inicia invisible, la animación la muestra */
+}
+
+/* Estilo específico para flores */
+.flower {
+    font-size: 20px; /* Tamaño de la flor (emoji) */
+    opacity: 0; /* Inicia invisible */
+    user-select: none; /* Evita seleccionar las flores */
+    filter: drop-shadow(0 0 3px rgba(255, 192, 203, 0.7)); /* Sombra rosa */
+}
+
+/* Animación de caída y desvanecimiento */
+@keyframes fall {
+    0% {
+        transform: translateY(-5vh); /* Empieza un poco arriba */
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 0.9; /* Visible durante la mayor parte */
+    }
+    100% {
+        transform: translateY(105vh); /* Cae hasta abajo y un poco más */
+        opacity: 0;
+    }
+}
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .content {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+    h1 {
+        font-size: 2.5em;
+    }
+    p {
+        font-size: 1em;
+    }
+    .signature {
+        font-size: 1.2em;
+    }
+    .flower {
+        font-size: 16px;
+    }
+}
